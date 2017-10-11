@@ -1,0 +1,38 @@
+/* .form-control{
+    border-radius: 2px;
+} */
+
+/* .form-control.ng-touched.ng-invalid{
+    border:1px solid red;
+}
+
+select.ng-touched.ng-invalid{
+    border:1px solid red;
+}
+
+.form-control.ng-touched.ng-valid{
+    border:1px solid green;
+}
+
+select.ng-touched.ng-valid{
+    border:1px solid green;
+} */
+
+.form-control{
+    /* border-width: 1px;
+    background-color: whitesmoke; */
+}
+
+label{
+    color:gray;
+}
+
+.form-group{
+margin-bottom: 40px;
+}
+.glyphicon-asterisk{
+ font-size: 10px;
+ vertical-align: top;
+}
+
+

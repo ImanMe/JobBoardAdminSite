@@ -1,0 +1,117 @@
+<div class="table-responsive">
+  <table class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th class="text-center">Actions</th>
+        <th><span (click)="sortBy('id')">Id</span></th>
+        <th>Status</th>
+        <th>CL</th>
+        <th>EG</th>
+        <th>POD</th>
+        <th>Office</th>
+        <th><span (click)="sortBy('title')">Title</span><span (click)="titleToggle()" class="fa fa-lg text-primary pull-right arrow"
+            [ngClass]="{
+        'fa-angle-double-right':!isTitleExpanded,
+        'fa-angle-double-left':isTitleExpanded
+      }"></span></th>
+        <th><span (click)="sortBy('jobboard')">Job Board</span></th>
+        <th>DIV</th>
+        <th><span (click)="sortBy('city')">City</span></th>
+        <th><span (click)="sortBy('isActive')">Status</span></th>
+        <th><span (click)="sortBy('country')">Country</span></th>
+        <th>Category</th>
+        <th>Company</th>
+        <th>ApsCl</th>
+        <th>BOB</th>
+        <th>2nds</th>
+        <th>Intvs</th>
+        <th>Activation</th>
+        <th>Expiration</th>
+        <th class="createdByTh">CreatedBy<span (click)="createdByToggle()" class="fa fa-lg text-primary pull-right arrow" [ngClass]="{
+          'fa-angle-double-right':!isCreatedByExpanded,
+          'fa-angle-double-left':isCreatedByExpanded
+        }"></span></th>
+        <th>Created</th>
+        <th>ActiveFor</th>
+        <th>ActiveForThisWeek</th>
+        <th>Email<span (click)="emailToggle()" class="fa fa-lg text-primary pull-right arrow" [ngClass]="{
+          'fa-angle-double-right':!isEmailExpanded,
+          'fa-angle-double-left':isEmailExpanded
+        }"></span></th>
+        <th>Url</th>
+      </tr>
+      <tr>
+        <td><button (click)="onFilterChange()" class="btn btn-block btn-primary btn-sm"><i class="fa fa-search"></i> Search</button></td>
+        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.id" type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.title" type="text" class="form-control input-sm"></td>
+        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.jobboard" type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+        <td><input type="text" class="form-control input-sm"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of jobs.items">
+        <td>
+          <button class="btn btn-success btn-sm actionBtn" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <button class="btn btn-info btn-sm actionBtn" title="Clone"><i class="fa fa-clone" aria-hidden="true"></i></button>
+          <button class="btn btn-warning btn-sm actionBtn" [disabled]="!job.isActive" (click)="expire()" title="Expire"><i class="fa fa-times expireicon" aria-hidden="true"></i></button>
+          <button class="btn btn-danger btn-sm actionBtn" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        </td>
+        <td>{{job.id}}</td>
+        <td class="text-center"><span class="fa fa-lg" [ngClass]="{
+        'fa-check text-success':job.isActive,
+        'fa-times text-danger':!job.isActive
+      }"></span></td>
+        <td>{{job.CloneFrom}}</td>
+        <td>{{job.everGreenId}}</td>
+        <td>{{job.schedulingPod}}</td>
+        <td>{{job.officeId}}</td>
+        <td>{{job.title | summary:titleLength}}</td>
+        <td>{{job.jobBoard}}</td>
+        <td>{{job.division}}</td>
+        <td>{{job.city}}</td>
+        <td>{{job.state}}</td>
+        <td>{{job.country}}</td>
+        <td>{{job.category}}</td>
+        <td>{{job.companyName}}</td>
+        <td>{{job.stat?.apsCl}}</td>
+        <td>{{job.stat?.bob}}</td>
+        <td>{{job.stat?.intvs2}}</td>
+        <td>{{job.stat?.intvs}}</td>
+        <td>{{job.activationDate}}</td>
+        <td>{{job.expirationDate}}</td>
+        <td>{{job.createdBy | summary:createdByLength}}</td>
+        <td>{{job.createdDate}}</td>
+        <td><span class="fa fa-search"></span></td>
+        <td></td>
+        <td>{{job.emailTo | summary:emailLength}}</td>
+        <td><a target="blank" href="{{onlineUrl+job.id}}">Link</a></td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="text-center">
+  <pagination [total-items]="jobs.totalItems" [page-size]="PAGE_SIZE" (page-changed)="onPageChange($event)"></pagination>
+</div>

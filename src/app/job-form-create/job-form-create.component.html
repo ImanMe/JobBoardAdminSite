@@ -1,0 +1,206 @@
+<div class="container">
+  <div class="row">
+    <!-- <div class="alert alert-success">
+      All fields marked with <span class="glyphicon glyphicon-asterisk text-danger"></span> are <strong>Required</strong>
+    </div> -->
+
+    <div class="col-md-4">
+      <div class="label label-primary pull-left">
+        All fields marked with <span class="glyphicon glyphicon-asterisk text-danger"></span> are <strong>Required</strong>
+      </div>
+      <br><br>
+      <form [formGroup]="form" (ngSubmit)="create()">
+        <div class="form-group">
+          <label for="title">Title</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
+          <input formControlName="title" id="title" type="text" class="form-control">
+          <div *ngIf="!title?.valid && title?.touched">
+            <span class="label label-danger" *ngIf="title.errors?.required">Title is Required.</span>
+            <span class="text-muted" *ngIf="title.errors?.minlength">Should atleast consist of {{title.errors.minlength.requiredLength}} characaters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="employmentType">Employment Type</label>
+          <select formControlName="employmentTypeId" name="employmentTypeId" class="form-control">
+              <option value=""></option>
+              <option *ngFor="let type of employmentTypes" [value]="type.id">{{type.name}}</option>
+        </select>
+          <div class="text-muted" *ngIf="!employmentTypeId?.valid && employmentTypeId?.touched">
+            <span class="text-muted" *ngIf="employmentTypeId.errors?.required">Employment Type is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="occupation">Occuaption</label>
+          <select size=10 multiple formControlName="selectedOccupation" name="occupation" id="occupation" class="form-control">
+          <option *ngFor="let occupation of occupations" [value]="occupation.id">{{occupation.name}}</option>
+        </select>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select formControlName="categoryId" name="category" class="form-control">
+                <option value=""></option>
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+          <div class="text-muted" *ngIf="!categoryId?.valid && categoryId?.touched">
+            <span class="text-muted" *ngIf="categoryId.errors?.required">Category is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="jobDescription">Job Description</label>
+          <textarea formControlName="jobDescription" name="jobDescription" id="jobDescription" cols="30" rows="10" class="form-control"></textarea>
+          <div class="text-muted" *ngIf="!jobDescription?.valid && jobDescription?.touched">
+            <span class="text-muted" *ngIf="jobDescription.errors?.required">Job Description is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="jobRequirements">Job Requirements</label>
+          <textarea formControlName="jobRequirements" name="jobRequirements" id="jobRequirements" cols="30" rows="10" class="form-control"></textarea>
+          <div class="text-muted" *ngIf="!jobRequirements?.valid && jobRequirements?.touched">
+            <span class="text-muted" *ngIf="jobRequirements.errors?.required">Job Requirements is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Salary</label>
+          <input formControlName="salary" id="salary" type="text" class="form-control">
+          <div class="text-muted" *ngIf="!salary?.valid && salary?.touched">
+            <span class="text-muted">Salary must be a number.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="currency">Currency</label>
+          <select formControlName="currency" name="currency" class="form-control">
+                  <option value=""></option>
+                  <option *ngFor="let currency of currencies" [value]="currency.name">{{currency.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label>Salary Type</label>
+          <div *ngFor="let type of salaryTypes" class="radio">
+            <label>
+                <input formControlName="salaryTypeId" type="radio"  name="salaryTypeId" [value]="type.id"/> {{type.name}}
+            </label>
+          </div>
+          <div class="text-muted" *ngIf="!salaryTypeId?.valid && salaryTypeId?.touched">
+            <span class="text-muted">Salary Type is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="countryId">Country</label>
+          <select formControlName="countryId" name="countryId" class="form-control" (change)="populateStates($event.target.value)">
+                  <option value=" "></option>
+                  <option *ngFor="let countryAndState of countriesAndStates" [value]="countryAndState.id">
+                  {{countryAndState.name}}
+                  </option>
+            </select>
+          <div class="text-muted" *ngIf="!countryId?.valid && countryId?.touched">
+            <span class="text-muted">Country is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="countryId">States</label>
+          <select formControlName="stateId" name="stateId" class="form-control">
+                    <option value=" "></option>
+                    <option *ngFor="let state of states" [value]="state.id">
+                    {{state.name}}
+                    </option>
+              </select>
+          <div class="text-muted" *ngIf="!stateId?.valid && stateId?.touched">
+            <span class="text-muted">State is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>City</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
+          <input formControlName="city" id="city" type="text" class="form-control">
+          <div *ngIf="!city?.valid && city?.touched">
+            <span class="text-muted" *ngIf="city.errors?.required">City is Required.</span>
+            <span class="text-muted" *ngIf="city.errors?.maxLength">Should have maximum 60 characaters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Zip Code</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
+          <input formControlName="zipCode" id="zipCode" type="text" class="form-control">
+          <div *ngIf="!zipCode?.valid && zipCode?.touched">
+            <span class="text-muted" *ngIf="zipCode.errors?.required">Zip Code is Required.</span>
+            <span class="text-muted" *ngIf="zipCode.errors?.maxLength">Should have maximum 10 characaters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input formControlName="address" id="address" type="text" class="form-control">
+          <div *ngIf="!address?.valid && address?.touched">
+            <span class="text-muted">Address can have maximum 120 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="minimumExperience">Minimum Experience</label>
+          <input formControlName="minimumExperience" id="minimumExperience" type="text" class="form-control">
+          <div *ngIf="!minimumExperience?.valid && minimumExperience?.touched">
+            <span class="text-muted">Only Numbers between 0 and 39</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="maximumExperience">Maximum Experience</label>
+          <input formControlName="maximumExperience" id="maximumExperience" type="text" class="form-control">
+          <div *ngIf="!maximumExperience?.valid && maximumExperience?.touched">
+            <span class="text-muted">Only Numbers between 0 and 39</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="companyName">Company</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
+          <input formControlName="companyName" id="companyName" type="text" class="form-control">
+          <div *ngIf="!companyName?.valid && companyName?.touched">
+            <span class="text-muted" *ngIf="companyName.errors?.required">Company Name is Required.</span>
+            <span class="text-muted" *ngIf="companyName.errors?.maxLength">Should have maximum 120 characaters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="jobBoardId">Job Board</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
+          <select formControlName="jobBoardId" name="jobBoardId" class="form-control" (change)="getEmailApplyStatus($event.target.value)">
+                <option value=" "></option>
+                <option *ngFor="let jobBoard of jobBoards " [value]="jobBoard.id ">{{jobBoard.name}}</option>
+          </select>
+          <div class="text-text-muted " *ngIf="!jobBoardId?.valid && jobBoardId?.touched ">
+            <span class="text-muted " *ngIf="jobBoardId.errors?.required ">Job Board is Required.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="emailTo">Email</label><span *ngIf="isEmailApply" class="glyphicon glyphicon-asterisk text-danger"></span>
+          <input formControlName="emailTo" id="emailTo" type="text" class="form-control">
+          <div *ngIf="!emailTo?.valid && emailTo?.touched">
+            <span class="text-muted" *ngIf="emailTo.errors?.required">Email is Required.</span>
+            <span class="text-muted" *ngIf="emailTo.errors?.email && emailTo.value!=''">Email Address is not Valid.</span>
+          </div>
+        </div>
+
+        <!-- <div class="form-group input-group">
+          <label for="">hjhjhjh</label>
+          <input type="text" class="form-control" value="test1" />
+          <span class="input-group-btn" style="width:0px;"></span>
+          <label for="">hjhjhjh</label>
+          <input type="text" class="form-control" value="test2" />
+        </div> -->
+
+        <p>{{form.value | json}}</p>
+        <button class="btn btn-primary btn-sm " type="submit ">Create</button>
+        <button class="btn btn-success btn-sm ">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
