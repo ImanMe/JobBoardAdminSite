@@ -2,6 +2,7 @@
     border-radius: 2px;
 } */
 
+
 /* .form-control.ng-touched.ng-invalid{
     border:1px solid red;
 }
@@ -18,21 +19,32 @@ select.ng-touched.ng-valid{
     border:1px solid green;
 } */
 
-.form-control{
+.form-control {
     /* border-width: 1px;
     background-color: whitesmoke; */
 }
 
-label{
-    color:gray;
+
+/* .alert {
+    margin-bottom: 20px;
+    height: 40px;
+    line-height: 30px;
+    padding: 4px 15px;
+} */
+
+.alert > .glyphicon-asterisk {
+    vertical-align: text-top;
 }
 
-.form-group{
-margin-bottom: 40px;
-}
-.glyphicon-asterisk{
- font-size: 10px;
- vertical-align: top;
+label {
+    color: gray;
 }
 
+.form-group {
+    margin-bottom: 40px;
+}
 
+.glyphicon-asterisk {
+    font-size: 10px;
+    vertical-align: top;
+}

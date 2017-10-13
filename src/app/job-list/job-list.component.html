@@ -7,7 +7,7 @@
 
   </div>
   <div class="pull-right">
-    <select (change)="onFilterChange()" [(ngModel)]="query.listtype" class="btn btn-primary btn-sm">          
+    <select (change)="onFilterChange()" [(ngModel)]="query.listtype" class="btn btn-default btn-sm">          
           <option value=""></option>
           <option value="conversion">Conversion</option>
           <option value="listing">Listing</option>
@@ -62,45 +62,45 @@
         }"></span></th>
         <th>Url</th>
       </tr>
-      <tr>
-        <td><button (click)="onFilterChange()" class="btn btn-block btn-primary btn-sm"><i class="fa fa-search"></i> Search</button></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.id" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><i class="fa fa-filter"></i><select (change)="onFilterChange()" [(ngModel)]="query.isactive" class="filterselect">          
+      <tr class="inputtr">
+        <td class="btntd"><button (click)="onFilterChange()" class="btn btn-block btn-primary btn-sm"><i class="fa fa-search"></i> Search</button></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.id" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><select (change)="onFilterChange()" [(ngModel)]="query.isactive" class="form-control input-sm filterselect">         
             <option value=""></option>
             <option value="true">Active</option>
             <option value="false">Expired</option>
       </select></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.clonefrom" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.evergreenid" type="text" class="form-control input-sm"
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.clonefrom" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.evergreenid" type="text" class="form-control input-sm"
             placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.schedulingPod" type="text" class="form-control input-sm"
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.schedulingPod" type="text" class="form-control input-sm"
             placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.officeid" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.title" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.jobboard" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.division" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.city" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.state" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><i class="fa fa-filter"></i><select (change)="onFilterChange()" [(ngModel)]="query.country" class="filterselect">          
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.officeid" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.title" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.jobboard" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.division" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.city" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.state" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><select (change)="onFilterChange()" [(ngModel)]="query.country" class="form-control input-sm filterselect">          
             <option value=""></option>
             <option value="US">US</option>
             <option value="CA">CA</option>
       </select></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.category" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.companyname" type="text" class="form-control input-sm"
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.category" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.companyname" type="text" class="form-control input-sm"
             placeholder="&#xf0b0;"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.createdby" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.createdby" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
+        <td class="inputtd"></td>
       </tr>
     </thead>
     <tbody>

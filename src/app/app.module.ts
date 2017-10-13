@@ -14,6 +14,8 @@ import { NavmenuComponent } from './navmenu/navmenu.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { BoardListComponent } from './board-list/board-list.component';
 import { BoardFormComponent } from './board-form/board-form.component';
+import { ReportsComponent } from './reports/reports.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
   declarations: [
@@ -25,18 +27,22 @@ import { BoardFormComponent } from './board-form/board-form.component';
     PaginationComponent,
     BoardListComponent,
     BoardFormComponent,
+    ReportsComponent,
   ],
   imports: [
     HttpModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: 'admin/jobs', pathMatch: 'full' },
       { path: 'admin/jobs', component: JobListComponent },
       { path: 'admin/jobs/create', component: JobFormCreateComponent },
       { path: 'admin/boards', component: BoardListComponent },
       { path: 'admin/boards/create', component: BoardFormComponent },
+      { path: 'admin/reports', component: ReportsComponent },
       { path: '**', redirectTo: 'admin/jobs' }
     ])
   ],

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <div class="pull-left">
       <h4>Job Board</h4>
     </div>
@@ -11,34 +11,42 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <hr>
     <div class="table-responsive">
       <table class="table table-condensed">
         <thead>
           <tr>
+            <th class="text-center">Actions</th>
             <th>Id</th>
             <th>Name</th>
             <th class="text-center">Online Apply</th>
             <th class="text-center">Email Apply</th>
-            <th colspan="2" class="text-center">Actions</th>
-
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let board of boards">
+            <td class="text-center">
+              <button title="Edit" class="btn btn-warning btn-sm actionBtn">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button>
+              <button title="Delete" class="btn btn-danger btn-sm actionBtn">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </button>
+            </td>
             <td>{{board.id}}</td>
             <td>{{board.name}}</td>
-            <td class="text-center"><span class="fa fa-lg" [ngClass]="{
+            <td class="text-center"><span class="fa" [ngClass]="{
               'fa-check text-success':board.isOnlineApply,
               'fa-times text-danger':!board.isOnlineApply
             }"></span></td>
-            <td class="text-center"><span class="fa fa-lg" [ngClass]="{
+            <td class="text-center">
+              <span class="fa" [ngClass]="{
               'fa-check text-success':board.isEmailApply,
               'fa-times text-danger':!board.isEmailApply
-            }"></span></td>
-            <td class="text-center"><button title="Edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-              <button title="Delete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+            }"></span>
+            </td>
+
           </tr>
         </tbody>
       </table>

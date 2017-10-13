@@ -15,8 +15,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/jobs/create']">Create</a></li>
-        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/boards']">Job Boards</a></li>
+        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/jobs']">Home</a></li>
+        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/boards']">Board</a></li>
+        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/reports']">Reports</a></li>
+        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/boards']">Applicants</a></li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
