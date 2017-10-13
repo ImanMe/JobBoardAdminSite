@@ -1,18 +1,11 @@
 th,td{
     white-space: nowrap;
+    min-width: 50px;
 }
 
 .createdByTh{
     min-width: 95px !important;
 }
-
-/* .expireicon{
-    color:red;
-}
-
-button[disabled]>i {
-    color:gray;
-} */
 
 .actionBtn{
     padding: 2px 7px;
@@ -22,40 +15,35 @@ button[disabled]>i {
     cursor: pointer;
 }
 
-a{
-color: blue;
-}
-
 th{
     font-size: 11px;
     cursor: pointer;
-    min-width: 40px;
 }
+
 td{
     font-size: 12px;
     vertical-align: middle !important;
-    min-width: 40px;
 }
 
-/* .actionBtn{
-    background-color: white;
-} */
 input{
     padding:0;
-    
+    font-family:Arial, FontAwesome
 }
+
 .form-control{
    border-right: 0;
    border-left: 0;
    border-top: 0;
    border-radius: 0;
-   border-bottom:2px solid #530601!important;
+   border-bottom: 0;
 }
+
 .form-control:focus {
-    border-bottom:2px solid orange!important;
+    
     border-right: 0;
     border-left: 0;
     border-top: 0;
-     border-radius: 0;
+    border-radius: 0;
+    border-bottom: 1px solid;
 }
 

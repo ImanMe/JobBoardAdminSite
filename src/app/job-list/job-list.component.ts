@@ -20,6 +20,10 @@ export class JobListComponent implements OnInit {
   private readonly PAGE_SIZE = 10;
   queryResult: any = {};
   query: any = { pageSize: this.PAGE_SIZE };
+  statuses = [
+    { value: true, name: "Active" },
+    { value: false, name: "Expired" }
+  ];
   constructor(private jobService: JobService) { }
 
   ngOnInit() {
@@ -64,6 +68,4 @@ export class JobListComponent implements OnInit {
     this.isCreatedByExpanded = !this.isCreatedByExpanded;
     this.createdByLength = this.isCreatedByExpanded ? 1000 : 10;
   }
-
-
 }

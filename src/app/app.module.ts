@@ -1,3 +1,4 @@
+import { BoardService } from './services/board/board.service';
 import { JobService } from './services/job/job.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,8 @@ import { SummaryPipe } from './summary.pipe';
 import { RouterModule } from '@angular/router';
 import { NavmenuComponent } from './navmenu/navmenu.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { BoardListComponent } from './board-list/board-list.component';
+import { BoardFormComponent } from './board-form/board-form.component';
 
 
 @NgModule({
@@ -21,6 +24,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     SummaryPipe,
     NavmenuComponent,
     PaginationComponent,
+    BoardListComponent,
+    BoardFormComponent,
   ],
   imports: [
     HttpModule,
@@ -31,11 +36,13 @@ import { PaginationComponent } from './pagination/pagination.component';
       { path: '', redirectTo: 'jobs', pathMatch: 'full' },
       { path: 'jobs', component: JobListComponent },
       { path: 'create', component: JobFormCreateComponent },
+      { path: 'boards', component: BoardListComponent },
       { path: '**', redirectTo: 'jobs' }
     ])
   ],
   providers: [
-    JobService
+    JobService,
+    BoardService
   ],
   bootstrap: [AppComponent]
 })

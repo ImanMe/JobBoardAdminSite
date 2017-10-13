@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="pull-left">
+      <h4>Job Board</h4>
+    </div>
+    <div class="pull-right">
+      <a class="btn btn-default btn-sm" [routerLink]="['/jobs']">Back to List</a>
+      <a class="btn btn-success btn-sm" [routerLink]="['/create']">Create New</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <hr>
+    <div class="table-responsive">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th class="text-center">Online Apply</th>
+            <th class="text-center">Email Apply</th>
+            <th colspan="2" class="text-center">Actions</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let board of boards">
+            <td>{{board.id}}</td>
+            <td>{{board.name}}</td>
+            <td class="text-center"><span class="fa fa-lg" [ngClass]="{
+              'fa-check text-success':board.isOnlineApply,
+              'fa-times text-danger':!board.isOnlineApply
+            }"></span></td>
+            <td class="text-center"><span class="fa fa-lg" [ngClass]="{
+              'fa-check text-success':board.isEmailApply,
+              'fa-times text-danger':!board.isEmailApply
+            }"></span></td>
+            <td class="text-center"><button title="Edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+              <button title="Delete" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
