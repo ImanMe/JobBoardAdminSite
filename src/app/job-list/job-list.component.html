@@ -3,7 +3,16 @@
     <h4>Job List</h4>
   </div>
   <div class="pull-right">
-    <a class="btn btn-success btn-sm" [routerLink]="['/create']">Create New</a>
+    <a style="margin-left:4px;" class="btn btn-success btn-sm" [routerLink]="['/admin/jobs/create']">Create New</a>
+
+  </div>
+  <div class="pull-right">
+    <select (change)="onFilterChange()" [(ngModel)]="query.listtype" class="btn btn-primary btn-sm">          
+          <option value=""></option>
+          <option value="conversion">Conversion</option>
+          <option value="listing">Listing</option>
+          <option value="duplicate">duplicate</option>
+    </select>
   </div>
 </div>
 
@@ -56,7 +65,11 @@
       <tr>
         <td><button (click)="onFilterChange()" class="btn btn-block btn-primary btn-sm"><i class="fa fa-search"></i> Search</button></td>
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.id" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.isactive" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td><i class="fa fa-filter"></i><select (change)="onFilterChange()" [(ngModel)]="query.isactive" class="filterselect">          
+            <option value=""></option>
+            <option value="true">Active</option>
+            <option value="false">Expired</option>
+      </select></td>
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.clonefrom" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.evergreenid" type="text" class="form-control input-sm"
             placeholder="&#xf0b0;"></td>
@@ -68,7 +81,11 @@
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.division" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.city" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.state" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
-        <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.country" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+        <td><i class="fa fa-filter"></i><select (change)="onFilterChange()" [(ngModel)]="query.country" class="filterselect">          
+            <option value=""></option>
+            <option value="US">US</option>
+            <option value="CA">CA</option>
+      </select></td>
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.category" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
         <td><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.companyname" type="text" class="form-control input-sm"
             placeholder="&#xf0b0;"></td>
@@ -122,7 +139,7 @@
         <td><span class="fa fa-search"></span></td>
         <td></td>
         <td>{{job.emailTo | summary:emailLength}}</td>
-        <td><a target="blank" href="{{onlineUrl+job.id}}">Link</a></td>
+        <td><a target="blank" href="{{onlineUrl+job.id}}"><i>Preview</i></a></td>
       </tr>
     </tbody>
   </table>

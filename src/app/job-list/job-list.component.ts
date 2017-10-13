@@ -19,7 +19,8 @@ export class JobListComponent implements OnInit {
   onlineUrl = 'http://board.thejobwindow.com/home/onlineapply/';
   private readonly PAGE_SIZE = 10;
   queryResult: any = {};
-  query: any = { pageSize: this.PAGE_SIZE };
+  query: any = { pageSize: this.PAGE_SIZE, listtype: "hjhj" };
+  defaultTrue = true;
   statuses = [
     { value: true, name: "Active" },
     { value: false, name: "Expired" }

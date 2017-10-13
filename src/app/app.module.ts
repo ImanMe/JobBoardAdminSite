@@ -15,7 +15,6 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { BoardListComponent } from './board-list/board-list.component';
 import { BoardFormComponent } from './board-form/board-form.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,11 +32,12 @@ import { BoardFormComponent } from './board-form/board-form.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'jobs', pathMatch: 'full' },
-      { path: 'jobs', component: JobListComponent },
-      { path: 'create', component: JobFormCreateComponent },
-      { path: 'boards', component: BoardListComponent },
-      { path: '**', redirectTo: 'jobs' }
+      { path: '', redirectTo: 'admin/jobs', pathMatch: 'full' },
+      { path: 'admin/jobs', component: JobListComponent },
+      { path: 'admin/jobs/create', component: JobFormCreateComponent },
+      { path: 'admin/boards', component: BoardListComponent },
+      { path: 'admin/boards/create', component: BoardFormComponent },
+      { path: '**', redirectTo: 'admin/jobs' }
     ])
   ],
   providers: [

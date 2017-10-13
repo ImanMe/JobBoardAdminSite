@@ -1,6 +1,6 @@
 th,td{
     white-space: nowrap;
-    min-width: 50px;
+    min-width: 55px;
 }
 
 .createdByTh{
@@ -30,7 +30,7 @@ input{
     font-family:Arial, FontAwesome
 }
 
-.form-control{
+input{
    border-right: 0;
    border-left: 0;
    border-top: 0;
@@ -38,12 +38,34 @@ input{
    border-bottom: 0;
 }
 
-.form-control:focus {
+.filterselect{
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-radius: 0;
+    border-bottom: 0;
+    padding: 0;
+    font-size:12px;
+}
+
+input:focus {
     
     border-right: 0;
     border-left: 0;
     border-top: 0;
     border-radius: 0;
     border-bottom: 1px solid;
+}
+
+.filterselect:focus{
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-radius: 0;
+    border-bottom: 0;
+}
+
+.fa-filter{
+    color: #a9a9a9;
 }
 
