@@ -16,6 +16,12 @@ import { BoardListComponent } from './board-list/board-list.component';
 import { BoardFormComponent } from './board-form/board-form.component';
 import { ReportsComponent } from './reports/reports.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ActiveReportComponent } from './active-report/active-report.component';
+import { InactiveReportComponent } from './inactive-report/inactive-report.component';
+import { EvergreenReportComponent } from './evergreen-report/evergreen-report.component';
+import { CreatedbyReportComponent } from './createdby-report/createdby-report.component';
+import { ApplicantsComponent } from './applicants/applicants.component';
+import { UserAccessComponent } from './user-access/user-access.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +34,12 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     BoardListComponent,
     BoardFormComponent,
     ReportsComponent,
+    ActiveReportComponent,
+    InactiveReportComponent,
+    EvergreenReportComponent,
+    CreatedbyReportComponent,
+    ApplicantsComponent,
+    UserAccessComponent,
   ],
   imports: [
     HttpModule,
@@ -43,6 +55,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
       { path: 'admin/boards', component: BoardListComponent },
       { path: 'admin/boards/create', component: BoardFormComponent },
       { path: 'admin/reports', component: ReportsComponent },
+      { path: 'admin/applicants', component: ApplicantsComponent },
+      { path: 'admin/users', component: UserAccessComponent },
       { path: '**', redirectTo: 'admin/jobs' }
     ])
   ],

@@ -1,21 +1,26 @@
+<h3>Reports</h3>
+<br>
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">Ever Green</a></li>
-  <li><a data-toggle="tab" href="#menu1">Active</a></li>
-  <li><a data-toggle="tab" href="#menu2">In-Active</a></li>
-  <li><a data-toggle="tab" href="#menu2">Created By</a></li>
+  <li [class.active]="selectedReport == 'active'"><a (click)="selectedReport = 'active'">Active</a></li>
+  <li [class.active]="selectedReport == 'inactive'"><a (click)="selectedReport = 'inactive'">In-Active</a></li>
+  <li [class.active]="selectedReport == 'createdby'"><a (click)="selectedReport = 'createdby'">Created By</a></li>
+  <li [class.active]="selectedReport == 'evergreen'"><a (click)="selectedReport = 'evergreen'">Ever Green</a></li>
 </ul>
-
-<div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <h3>HOME</h3>
-    <p>Some content.</p>
+<div [ngSwitch]="selectedReport" class="reports">
+  <div class="container-fluid">
+    <br>
+    <div *ngSwitchCase="'active'">
+      <app-active-report></app-active-report>
+    </div>
+    <div *ngSwitchCase="'inactive'">
+      <app-inactive-report></app-inactive-report>
+    </div>
+    <div *ngSwitchCase="'createdby'">
+      <app-createdby-report></app-createdby-report>
+    </div>
+    <div *ngSwitchCase="'evergreen'">
+      <app-evergreen-report></app-evergreen-report>
+    </div>
   </div>
-  <div id="menu1" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Some content in menu 1.</p>
-  </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
-  </div>
+  <br>
 </div>

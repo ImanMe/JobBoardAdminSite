@@ -13,6 +13,12 @@ export class JobService {
       );
   }
 
+  getJobBoards(filter) {
+    return this.http.get(this.endpoint + 'jobboards')
+      .map(res => res.json()
+      );
+  }
+
   toQueryString(obj) {
     var parts = [];
     for (var property in obj) {

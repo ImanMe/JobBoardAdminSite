@@ -46,6 +46,10 @@ export class JobFormCreateComponent {
 
     companyName: new FormControl('', [Validators.required, Validators.maxLength(120)]),
 
+    activationDate: new FormControl('', [Validators.required]),
+
+    expirationDate: new FormControl('', Validators.required),
+
     jobBoardId: new FormControl('', [Validators.required]),
 
     emailTo: new FormControl('', [Validators.email]),
