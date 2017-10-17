@@ -64,7 +64,7 @@
       <tr class="inputtr">
         <td class="btntd">
           <button style="width:49%" title="Serach" (click)="onFilterChange()" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button>
-          <button style="width:49%" title="Reset Filters" (click)="resetFilter()" class="btn btn-sm btn-default"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+          <button style="width:49%" title="Reset Filters" (click)="resetFilter()" class="btn btn-sm btn-default"><i class="fa fa-refresh" aria-hidden="true"></i></button>
         </td>
         <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.id" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
         <td class="inputtd"><select (change)="onFilterChange()" [(ngModel)]="query.isactive" class="form-control input-sm filterselect">         

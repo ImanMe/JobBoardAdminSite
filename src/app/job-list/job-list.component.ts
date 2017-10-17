@@ -17,7 +17,7 @@ export class JobListComponent implements OnInit {
   isCreatedByExpanded = false;
   createdByLength = 10;
   onlineUrl = 'http://board.thejobwindow.com/home/onlineapply/';
-  private readonly PAGE_SIZE = 10;
+  private readonly PAGE_SIZE = 5;
   queryResult: any = {};
   query: any = { pageSize: this.PAGE_SIZE, listtype: "" };
   defaultTrue = true;
@@ -42,6 +42,7 @@ export class JobListComponent implements OnInit {
   }
 
   onFilterChange() {
+    this.query.page = 1;
     this.populateJobs();
   }
 

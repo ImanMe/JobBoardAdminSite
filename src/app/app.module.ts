@@ -1,6 +1,7 @@
 import { BoardService } from './services/board/board.service';
 import { JobService } from './services/job/job.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
@@ -22,6 +23,8 @@ import { EvergreenReportComponent } from './evergreen-report/evergreen-report.co
 import { CreatedbyReportComponent } from './createdby-report/createdby-report.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { UserAccessComponent } from './user-access/user-access.component';
+import { EditorModule } from 'primeng/primeng';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,12 +43,15 @@ import { UserAccessComponent } from './user-access/user-access.component';
     CreatedbyReportComponent,
     ApplicantsComponent,
     UserAccessComponent,
+    NotFoundComponent,
   ],
   imports: [
     HttpModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    EditorModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     RouterModule.forRoot([
