@@ -1,19 +1,28 @@
+import { JobService } from './../services/job/job.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-
+import 'rxjs/add/Observable/forkJoin';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-job-form-create',
   templateUrl: './job-form-create.component.html',
   styleUrls: ['./job-form-create.component.css']
 })
-export class JobFormCreateComponent {
+export class JobFormCreateComponent implements OnInit {
   states;
   isStateDisabled = true;
   isEmailApply = false;
+  salaryTypes: any[];
+  jobBoards: any[];
+  countriesAndStates: any[];
+  employmentTypes: any[];
+  currencies = ["USD", "CAD"];
+  categories: any[];
+  occupations: any[];
   form;
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private jobService: JobService) {
     this.form = fb.group({
-      title: ['', Validators.required, Validators.minLength(3)],
+      title: ['', [Validators.required, Validators.minLength(3)]],
       employmentTypeId: ['', Validators.required],
       selectedOccupation: ['', []],
       categoryId: ['', [Validators.required]],
@@ -30,8 +39,8 @@ export class JobFormCreateComponent {
       maximumExperience: ['', [Validators.pattern("[0-3]?[0-9]")]],
       minimumExperience: ['', [Validators.pattern("[0-3]?[0-9]")]],
       companyName: ['', [Validators.required, Validators.maxLength(120)]],
-      activationDate: ['', [Validators.required, Validators.pattern("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d")]],
-      expirationDate: ['', [Validators.required, Validators.pattern("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d")]],
+      activationDate: ['', [Validators.required, Validators.pattern("")]],
+      expirationDate: ['', [Validators.required, Validators.pattern("")]],
       jobBoardId: ['', [Validators.required]],
       schedulingPod: ['', [Validators.required, Validators.pattern("[0-9]*")]],
       officeId: ['', [Validators.required, Validators.pattern("[0-9]*")]],
@@ -77,11 +86,33 @@ export class JobFormCreateComponent {
   get isBestPerformin() { return this.form.get('isBestPerformin') };
   get isEverGreen() { return this.form.get('isEverGreen') };
 
+  ngOnInit(): void {
+    var sources = [
+      this.jobService.getSalaryTypes(),
+      this.jobService.getJobBoards(),
+      this.jobService.getCategories(),
+      this.jobService.getOccupations(),
+      this.jobService.getCountriesWithStates(),
+      this.jobService.getEmploymentTypes(),
+    ];
+
+    Observable.forkJoin(sources).subscribe(data => {
+      this.salaryTypes = data[0];
+      this.jobBoards = data[1];
+      this.categories = data[2];
+      this.occupations = data[3];
+      this.countriesAndStates = data[4];;
+      this.employmentTypes = data[5];
+    });
+  }
+
   create() {
     console.log('created');
   }
 
   populateStates(countryId) {
+    var country = this.countriesAndStates.find(m => m.id == countryId);
+    if (!country) return;
     this.states = this.countriesAndStates.find(m => m.id == countryId).states;
     this.enableStateInput();
   }
@@ -92,7 +123,9 @@ export class JobFormCreateComponent {
   }
 
   getEmailApplyStatus(jobBoardId: number) {
-    this.isEmailApply = this.jobBoards.find(j => j.id == jobBoardId).isEmailApply;
+    var board = this.jobBoards.find(j => j.id == jobBoardId);
+    if (board == null) return;
+    this.isEmailApply = board.isEmailApply;
     if (this.isEmailApply) {
       this.form.get('emailTo').setValidators([Validators.required, Validators.email]);
       this.form.get('emailTo').updateValueAndValidity();
@@ -102,74 +135,8 @@ export class JobFormCreateComponent {
     }
   }
 
-  employmentTypes = [
-    { id: 1, name: "Full Time" },
-    { id: 2, name: "Part Time" },
-    { id: 3, name: "Intern" }
-  ];
-
-  occupations = [
-    { id: 1, name: "occupation1" },
-    { id: 2, name: "occupation2" },
-    { id: 3, name: "occupation3" }
-  ];
-
-  categories = [
-    { id: 1, name: "category1" },
-    { id: 2, name: "category2" },
-    { id: 3, name: "category3" }
-  ];
-
-  currencies = [
-    { name: "USD" }, { name: "CAD" }
-  ];
-
-  salaryTypes = [
-    { id: 1, name: "Per Hour" },
-    { id: 2, name: "Per Week" },
-  ];
-
-  jobBoards = [
-    { id: 1, isOnllineApply: true, isEmailApply: false, name: "JobBoard1" },
-    { id: 2, isOnllineApply: false, isEmailApply: true, name: "JobBoard2" },
-    { id: 3, isOnllineApply: false, isEmailApply: true, name: "JobBoard3" },
-    { id: 4, isOnllineApply: true, isEmailApply: false, name: "JobBoard4" },
-  ];
-
-  countriesAndStates = [
-    {
-      id: 1,
-      name: "United States",
-      code: "US",
-      states: [
-        {
-          id: 1,
-          name: "New York",
-          code: "NY"
-        },
-        {
-          id: 2,
-          name: "Alabama",
-          code: "AL"
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "Canada",
-      code: "CA",
-      states: [
-        {
-          id: 3,
-          name: "Ontario",
-          code: "ON"
-        },
-        {
-          id: 4,
-          name: "British Columbia",
-          code: "BC"
-        }
-      ]
-    }
-  ];
+  submit() {
+    var result = this.jobService.create(this.form.value);
+  };
 }
+

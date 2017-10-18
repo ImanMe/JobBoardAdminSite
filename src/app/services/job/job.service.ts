@@ -13,12 +13,6 @@ export class JobService {
       );
   }
 
-  getJobBoards(filter) {
-    return this.http.get(this.endpoint + 'jobboards')
-      .map(res => res.json()
-      );
-  }
-
   toQueryString(obj) {
     var parts = [];
     for (var property in obj) {
@@ -27,5 +21,45 @@ export class JobService {
         parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
     }
     return parts.join('&');
+  }
+
+  getSalaryTypes() {
+    return this.http.get(this.endpoint + 'salarytypes')
+      .map(res => res.json()
+      );
+  }
+
+  getJobBoards() {
+    return this.http.get(this.endpoint + 'jobboards')
+      .map(res => res.json()
+      );
+  }
+
+  getEmploymentTypes() {
+    return this.http.get(this.endpoint + 'employmenttypes')
+      .map(res => res.json()
+      );
+  }
+
+  getCategories() {
+    return this.http.get(this.endpoint + 'categories')
+      .map(res => res.json()
+      );
+  }
+
+  getOccupations() {
+    return this.http.get(this.endpoint + 'occupations')
+      .map(res => res.json()
+      );
+  }
+
+  getCountriesWithStates() {
+    return this.http.get(this.endpoint + 'countries?includestates=true')
+      .map(res => res.json()
+      );
+  }
+
+  create(job) {
+    return this.http.post(this.endpoint, job);
   }
 }

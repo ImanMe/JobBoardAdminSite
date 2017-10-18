@@ -3,7 +3,7 @@
   <hr>
   <div class="row">
     <div class="col-md-6 col-lg-4">
-      <form [formGroup]="form" (ngSubmit)="create()">
+      <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="form-group">
           <label for="title">Title</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
           <input formControlName="title" name="title" id="title" type="text" class="form-control">
@@ -75,7 +75,7 @@
           <label for="currency">Currency</label>
           <select formControlName="currency" name="currency" class="form-control">
                     <option value=""></option>
-                    <option *ngFor="let currency of currencies" [value]="currency.name">{{currency.name}}</option>
+                    <option *ngFor="let currency of currencies" [value]="currency">{{currency}}</option>
               </select>
         </div>
 
@@ -94,7 +94,7 @@
         <div class="form-group">
           <label for="countryId">Country</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
           <select formControlName="countryId" name="countryId" class="form-control" (change)="populateStates($event.target.value)">
-                    <option value=" "></option>
+                    <option value=""></option>
                     <option *ngFor="let countryAndState of countriesAndStates" [value]="countryAndState.id">
                     {{countryAndState.name}}
                     </option>
@@ -191,7 +191,7 @@
         <div class="form-group">
           <label for="jobBoardId">Job Board</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
           <select formControlName="jobBoardId" name="jobBoardId" class="form-control" (change)="getEmailApplyStatus($event.target.value)">
-                  <option value=" "></option>
+                  <option value="0"></option>
                   <option *ngFor="let jobBoard of jobBoards " [value]="jobBoard.id ">{{jobBoard.name}}</option>
             </select>
           <div class="text-text-danger " *ngIf="!jobBoardId?.valid && jobBoardId?.touched ">

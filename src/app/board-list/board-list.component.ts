@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardListComponent implements OnInit {
   boards;
-  constructor(private BoardService: BoardService) { }
+  constructor(private boardService: BoardService) { }
 
   ngOnInit() {
-    this.BoardService.getBoards()
+    this.boardService.getBoards()
       .subscribe(boards => this.boards = boards);
   }
 
