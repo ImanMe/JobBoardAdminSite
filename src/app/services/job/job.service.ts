@@ -13,6 +13,12 @@ export class JobService {
       );
   }
 
+  getJob(id) {
+    return this.http.get(this.endpoint + 'jobs/' + id)
+      .map(res => res.json()
+      );
+  }
+
   toQueryString(obj) {
     var parts = [];
     for (var property in obj) {
@@ -60,6 +66,6 @@ export class JobService {
   }
 
   create(job) {
-    return this.http.post(this.endpoint, job);
+    return this.http.post(this.endpoint + 'jobs', job);
   }
 }

@@ -3,7 +3,7 @@
   <hr>
   <div class="row">
     <div class="col-md-6 col-lg-4">
-      <form [formGroup]="form" (ngSubmit)="submit()">
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
         <div class="form-group">
           <label for="title">Title</label><span class="glyphicon glyphicon-asterisk text-danger"></span>
           <input formControlName="title" name="title" id="title" type="text" class="form-control">
@@ -205,7 +205,6 @@
           <div *ngIf="!schedulingPod?.valid && schedulingPod?.touched">
             <span *ngIf="schedulingPod.errors?.pattern" class="text-danger">Only Numbers are Allowed</span>
             <span *ngIf="schedulingPod.errors?.required" class="text-danger">Scheduling POD is Required.</span>
-
           </div>
         </div>
 
@@ -215,7 +214,6 @@
           <div *ngIf="!officeId?.valid && officeId?.touched">
             <span *ngIf="officeId.errors?.pattern" class="text-danger">Only Numbers are Allowed</span>
             <span *ngIf="officeId.errors?.required" class="text-danger">Office Id is Required.</span>
-
           </div>
         </div>
 
@@ -244,38 +242,39 @@
             <label for="author">Author</label>
             <input formControlName="author" id="author" type="text" class="form-control">
           </div>
-          <div class="form-group">
-            <label for="apscl">ApsCl</label>
-            <input formControlName="apscl" id="apscl" type="text" class="form-control">
-            <div *ngIf="!apscl?.valid && apscl?.touched && apscl?.errors?.pattern">
-              <span class="text-danger">Only Numbers are Allowed.</span>
+          <div formGroupName="stat">
+            <div class="form-group">
+              <label for="apscl">ApsCl</label>
+              <input formControlName="apscl" id="apscl" type="text" class="form-control">
+              <div *ngIf="!apscl?.valid && apscl?.touched && apscl?.errors?.pattern">
+                <span class="text-danger">Only Numbers are Allowed.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bob">BOB</label>
+              <input formControlName="bob" id="bob" type="text" class="form-control">
+              <div *ngIf="!bob?.valid && bob?.touched && bob?.errors?.pattern">
+                <span class="text-danger">Only Numbers are Allowed.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="intvs">Intvs</label>
+              <input formControlName="intvs" id="intvs" type="text" class="form-control">
+              <div *ngIf="!intvs?.valid && intvs?.touched && intvs?.errors?.pattern">
+                <span class="text-danger">Only Numbers are Allowed.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="intvs2">Intvs2</label>
+              <input formControlName="intvs2" id="intvs2" type="text" class="form-control">
+              <div *ngIf="!intvs2?.valid && intvs2?.touched && intvs2?.errors?.pattern">
+                <span class="text-danger">Only Numbers are Allowed.</span>
+              </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <label for="bob">BOB</label>
-            <input formControlName="bob" id="bob" type="text" class="form-control">
-            <div *ngIf="!bob?.valid && bob?.touched && bob?.errors?.pattern">
-              <span class="text-danger">Only Numbers are Allowed.</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="intvs">Intvs</label>
-            <input formControlName="intvs" id="intvs" type="text" class="form-control">
-            <div *ngIf="!intvs?.valid && intvs?.touched && intvs?.errors?.pattern">
-              <span class="text-danger">Only Numbers are Allowed.</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="intvs2">Intvs2</label>
-            <input formControlName="intvs2" id="intvs2" type="text" class="form-control">
-            <div *ngIf="!intvs2?.valid && intvs2?.touched && intvs2?.errors?.pattern">
-              <span class="text-danger">Only Numbers are Allowed.</span>
-            </div>
-          </div>
-
           <div class="checkbox">
             <label>
                   <input class="big-checkbox" formControlName="isBestPerforming" type="checkbox" id="isBestPerforming" name="isBestPerforming"/> Is Best Performing
@@ -284,14 +283,14 @@
 
           <div for="isEverGreen" class="checkbox">
             <label>
-                  <input class="big-checkbox" formControlName="isEverGreen" ngModel type="checkbox" id="isEverGreen" name="isEverGreen"/> Is Ever Green
+                  <input class="big-checkbox" formControlName="isEverGreen" type="checkbox" id="isEverGreen" name="isEverGreen"/> Is Ever Green
                 </label>
           </div>
 
         </fieldset>
 
         <p>{{form.value | json}}</p>
-        <button class="btn btn-success pull-left" type="submit ">Create</button>
+        <button class="btn btn-success pull-left" type="submit">Create</button>
         <button class="btn btn-warning pull-right cancel-btn">Cancel</button>
         <button class="btn btn-primary pull-right">Back to List</button>
       </form>

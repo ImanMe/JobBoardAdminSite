@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import 'rxjs/add/Observable/forkJoin';
 import { Observable } from 'rxjs/Observable';
+import { ToastyService } from 'ng2-toasty';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-job-form-create',
   templateUrl: './job-form-create.component.html',
@@ -14,13 +16,22 @@ export class JobFormCreateComponent implements OnInit {
   isEmailApply = false;
   salaryTypes: any[];
   jobBoards: any[];
+  job = { id: 0 };
   countriesAndStates: any[];
   employmentTypes: any[];
   currencies = ["USD", "CAD"];
   categories: any[];
   occupations: any[];
   form;
-  constructor(fb: FormBuilder, private jobService: JobService) {
+  constructor(
+    fb: FormBuilder,
+    private jobService: JobService,
+    private toastyService: ToastyService,
+    private route: ActivatedRoute,
+    private router: Router) {
+    route.params.subscribe(p => {
+      this.job.id = +p['id'];
+    });
     this.form = fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       employmentTypeId: ['', Validators.required],
@@ -47,12 +58,15 @@ export class JobFormCreateComponent implements OnInit {
       division: ['', [Validators.required]],
       emailTo: ['', [Validators.email]],
       author: ['', []],
-      apscl: ['', [Validators.pattern("[0-9]*")]],
-      bob: ['', [Validators.pattern("[0-9]*")]],
-      intvs: ['', [Validators.pattern("[0-9]*")]],
-      intvs2: ['', [Validators.pattern("[0-9]*")]],
       isBestPerforming: ['', []],
-      isEverGreen: ['', []]
+      isEverGreen: ['', []],
+      stat: fb.group({
+        apscl: ['', [Validators.pattern("[0-9]*")]],
+        bob: ['', [Validators.pattern("[0-9]*")]],
+        intvs: ['', [Validators.pattern("[0-9]*")]],
+        intvs2: ['', [Validators.pattern("[0-9]*")]],
+      }),
+
     });
   }
 
@@ -78,11 +92,11 @@ export class JobFormCreateComponent implements OnInit {
   get schedulingPod() { return this.form.get('schedulingPod'); }
   get officeId() { return this.form.get('officeId'); }
   get division() { return this.form.get('division'); }
-  get author() { return this.form.get('author') };
-  get apscl() { return this.form.get('apscl') };
-  get bob() { return this.form.get('bob') };
-  get intvs() { return this.form.get('intvs') };
-  get intvs2() { return this.form.get('intvs2') };
+  get author() { return this.form.get('stat.author') };
+  get apscl() { return this.form.get('stat.apscl') };
+  get bob() { return this.form.get('stat.bob') };
+  get intvs() { return this.form.get('stat.intvs') };
+  get intvs2() { return this.form.get('stat.intvs2') };
   get isBestPerformin() { return this.form.get('isBestPerformin') };
   get isEverGreen() { return this.form.get('isEverGreen') };
 
@@ -96,6 +110,10 @@ export class JobFormCreateComponent implements OnInit {
       this.jobService.getEmploymentTypes(),
     ];
 
+    if (this.job.id) {
+      sources.push(this.jobService.getJob(this.job.id));
+    }
+
     Observable.forkJoin(sources).subscribe(data => {
       this.salaryTypes = data[0];
       this.jobBoards = data[1];
@@ -103,6 +121,15 @@ export class JobFormCreateComponent implements OnInit {
       this.occupations = data[3];
       this.countriesAndStates = data[4];;
       this.employmentTypes = data[5];
+      if (this.job.id) {
+        this.job = data[6];
+      }
+
+      this.job.id = 1;
+
+    }, err => {
+      if (err.status == 404)
+        this.router.navigate(['/not-found'])
     });
   }
 
@@ -136,7 +163,9 @@ export class JobFormCreateComponent implements OnInit {
   }
 
   submit() {
-    var result = this.jobService.create(this.form.value);
+    var result = this.jobService.create(this.form.value)
+      .subscribe(
+      x => console.log(x));
   };
 }
 
