@@ -1,3 +1,4 @@
+import { Job, Stat } from './../models/job';
 import { JobService } from './../services/job/job.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
@@ -16,7 +17,45 @@ export class JobFormCreateComponent implements OnInit {
   isEmailApply = false;
   salaryTypes: any[];
   jobBoards: any[];
-  job = { id: 0 };
+  job: Job = {
+    id: 0,
+    salary: null,
+    title: "",
+    employmentTypeId: null,
+    categoryId: null,
+    jobDescription: "",
+    selectedOccupation: [],
+    jobRequirements: "",
+    salaryTypeId: null,
+    countryId: null,
+    stateId: null,
+    city: "",
+    zipCode: "",
+    address: "",
+    minimumExperience: null,
+    maximumExperience: null,
+    companyName: "",
+    jobBoardId: null,
+    emailTo: "",
+    activationDate: "",
+    expirationDate: "",
+    schedulingPod: null,
+    officeId: null,
+    division: "",
+    author: "",
+    apscl: null,
+    bob: null,
+    intvs: null,
+    intvs2: null,
+    isBestPerforming: false,
+    isEverGreen: false,
+    stat: {
+      apsCl: null,
+      bob: null,
+      intvs: null,
+      intvs2: null
+    }
+  };
   countriesAndStates: any[];
   employmentTypes: any[];
   currencies = ["USD", "CAD"];
@@ -65,8 +104,7 @@ export class JobFormCreateComponent implements OnInit {
         bob: ['', [Validators.pattern("[0-9]*")]],
         intvs: ['', [Validators.pattern("[0-9]*")]],
         intvs2: ['', [Validators.pattern("[0-9]*")]],
-      }),
-
+      })
     });
   }
 
@@ -122,6 +160,8 @@ export class JobFormCreateComponent implements OnInit {
       this.countriesAndStates = data[4];;
       this.employmentTypes = data[5];
       if (this.job.id) {
+        this.enableStateInput();
+        this.job.stateId = 2;
         this.job = data[6];
       }
 
@@ -131,10 +171,6 @@ export class JobFormCreateComponent implements OnInit {
       if (err.status == 404)
         this.router.navigate(['/not-found'])
     });
-  }
-
-  create() {
-    console.log('created');
   }
 
   populateStates(countryId) {
