@@ -1,0 +1,45 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <h3 class="text-info">{{job.title}}</h3>
+      <br>
+      <p><span class="left text-muted">Reference Id</span><span class="right">{{job.id}}</span></p>
+      <p><span class="left text-muted">Location</span><span class="right">{{job.state}}, {{job.country}}</span></p>
+      <p><span class="left text-muted">Category</span><span class="right">{{job.category}}</span></p>
+      <p><span class="left text-muted">Employment Type</span><span class="right">{{job.employmentType}}</span></p>
+      <br>
+      <h4 class="text-warning">Job Requirements</h4>
+      <p [innerHTML]="job.jobRequirements"></p>
+      <br>
+      <h4 class="text-warning">Job Description</h4>
+      <p [innerHTML]="job.jobDescription"></p>
+    </div>
+    <div class="col-md-4">
+      <form action="">
+        <div class="form-group">
+          <label for="division">First Name</label>
+          <input id="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="division">Last Name</label>
+          <input id="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="division">Email</label>
+          <input id="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="division">Phone</label>
+          <input id="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="division">Resume</label>
+          <input id="name" type="file" class="form-control">
+        </div>
+        <button class="btn btn-success btn-block">Apply Now</button>
+      </form>
+    </div>
+  </div>
+</div>

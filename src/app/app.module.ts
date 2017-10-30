@@ -24,6 +24,8 @@ import { CreatedbyReportComponent } from './createdby-report/createdby-report.co
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { UserAccessComponent } from './user-access/user-access.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { StatsPendingComponent } from './stats-pending/stats-pending.component';
+import { OnlineApplyComponent } from './online-apply/online-apply.component';
 //import { AppErrorHandler } from './app.error-handler';
 
 @NgModule({
@@ -44,6 +46,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ApplicantsComponent,
     UserAccessComponent,
     NotFoundComponent,
+    StatsPendingComponent,
+    OnlineApplyComponent
   ],
   imports: [
     HttpModule,
@@ -57,11 +61,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
       { path: 'admin/jobs', component: JobListComponent },
       { path: 'admin/jobs/create', component: JobFormCreateComponent },
       { path: 'admin/jobs/edit/:id', component: JobFormCreateComponent },
+      { path: 'admin/jobs/clone/:id', component: JobFormCreateComponent },
       { path: 'admin/boards', component: BoardListComponent },
       { path: 'admin/boards/create', component: BoardFormComponent },
+      { path: 'admin/stats', component: StatsPendingComponent },
       { path: 'admin/reports', component: ReportsComponent },
       { path: 'admin/applicants', component: ApplicantsComponent },
       { path: 'admin/users', component: UserAccessComponent },
+      { path: 'jobs/onlineapply/:id', component: OnlineApplyComponent },
       { path: 'not-found', component: NotFoundComponent },
       { path: '**', redirectTo: 'admin/jobs' }
     ])

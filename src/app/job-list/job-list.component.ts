@@ -1,7 +1,7 @@
 import { PaginationComponent } from './../pagination/pagination.component';
 import { JobService } from './../services/job/job.service';
 import { Component, OnInit } from '@angular/core';
-
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-job-list',
@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./job-list.component.css']
 })
 export class JobListComponent implements OnInit {
+  hideTr: boolean = false;
+  isDataLoaded = false;
   jobs: any = {};
   isTitleExpanded = false;
   titleLength = 10;
@@ -30,7 +32,7 @@ export class JobListComponent implements OnInit {
     { value: "conversion", name: "Conversion" },
     { value: "duplicate", name: "Duplicate" },
   ];
-  constructor(private jobService: JobService) { }
+  constructor(private jobService: JobService, private toastyService: ToastyService) { }
 
   ngOnInit() {
     this.populateJobs();
@@ -38,7 +40,8 @@ export class JobListComponent implements OnInit {
 
   private populateJobs() {
     this.jobService.getJobs(this.query)
-      .subscribe(jobs => this.jobs = jobs);
+      .subscribe(jobs => { this.jobs = jobs, this.isDataLoaded = true });
+
   }
 
   onFilterChange() {
@@ -67,6 +70,40 @@ export class JobListComponent implements OnInit {
       pageSize: this.PAGE_SIZE
     };
     this.populateJobs();
+  }
+
+  delete(id, index) {
+    if (confirm("Are you sure?")) {
+      //console.log(this.jobs);
+      this.jobService.delete(id).subscribe(job => {
+        this.jobs.items.splice(index, 1);
+        this.toastyService.warning({
+          title: 'Success',
+          msg: 'Data was sucessfully Deleted.',
+          theme: 'bootstrap',
+          showClose: true,
+          timeout: 3000
+        });
+
+      });
+    }
+  }
+
+  expire(id) {
+    if (id) {
+      if (confirm("Are you sure?")) {
+        this.jobService.expire(id).subscribe(job => {
+          this.toastyService.warning({
+            title: 'Success',
+            msg: 'Job was sucessfully Expired.',
+            theme: 'bootstrap',
+            showClose: true,
+            timeout: 3000
+          });
+        });
+      }
+    }
+
   }
 
   titleToggle() {

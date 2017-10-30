@@ -1,0 +1,16 @@
+.well{
+    background-color: white;
+    border:1px solid #ebebeb;
+}
+
+.right{
+    padding-left: 20px;
+    color:navy;
+    
+}
+
+.left{
+    font-style: italic;
+    font-size: small;
+}
+

@@ -69,4 +69,16 @@ export class JobService {
   create(job) {
     return this.http.post(this.endpoint + 'jobs', job);
   }
+
+  update(job) {
+    return this.http.put(this.endpoint + 'jobs' + '/' + job.id, job);
+  }
+
+  delete(id) {
+    return this.http.delete(this.endpoint + 'jobs' + '/' + id);
+  }
+
+  expire(id) {
+    return this.http.get(this.endpoint + 'jobs/expire/' + id);
+  }
 }

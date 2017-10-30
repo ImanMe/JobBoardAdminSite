@@ -17,8 +17,9 @@ export class JobFormCreateComponent implements OnInit {
   isEmailApply = false;
   salaryTypes: any[];
   jobBoards: any[];
+  jobId: number;
   job: Job = {
-    id: 0,
+    id: null,
     salary: null,
     title: "",
     employmentTypeId: null,
@@ -130,13 +131,13 @@ export class JobFormCreateComponent implements OnInit {
   get schedulingPod() { return this.form.get('schedulingPod'); }
   get officeId() { return this.form.get('officeId'); }
   get division() { return this.form.get('division'); }
-  get author() { return this.form.get('stat.author') };
-  get apscl() { return this.form.get('stat.apscl') };
-  get bob() { return this.form.get('stat.bob') };
-  get intvs() { return this.form.get('stat.intvs') };
-  get intvs2() { return this.form.get('stat.intvs2') };
-  get isBestPerformin() { return this.form.get('isBestPerformin') };
-  get isEverGreen() { return this.form.get('isEverGreen') };
+  get author() { return this.form.get('stat.author'); }
+  get apscl() { return this.form.get('stat.apscl'); }
+  get bob() { return this.form.get('stat.bob'); }
+  get intvs() { return this.form.get('stat.intvs'); }
+  get intvs2() { return this.form.get('stat.intvs2'); }
+  get isBestPerformin() { return this.form.get('isBestPerformin'); }
+  get isEverGreen() { return this.form.get('isEverGreen'); }
 
   ngOnInit(): void {
     var sources = [
@@ -157,20 +158,21 @@ export class JobFormCreateComponent implements OnInit {
       this.jobBoards = data[1];
       this.categories = data[2];
       this.occupations = data[3];
-      this.countriesAndStates = data[4];;
+      this.countriesAndStates = data[4];
       this.employmentTypes = data[5];
       if (this.job.id) {
-        this.enableStateInput();
-        this.job.stateId = 2;
-        this.job = data[6];
+        this.jobId = this.job.id;
+        this.setJob(data[6]);
       }
-
-      this.job.id = 1;
-
     }, err => {
       if (err.status == 404)
         this.router.navigate(['/not-found'])
     });
+  }
+
+  setJob(j: Job) {
+    this.job = j;
+    this.populateStates(j.stateId);
   }
 
   populateStates(countryId) {
@@ -199,9 +201,21 @@ export class JobFormCreateComponent implements OnInit {
   }
 
   submit() {
-    var result = this.jobService.create(this.form.value)
-      .subscribe(
-      x => console.log(x));
-  };
-}
+    this.job.id = this.jobId;
+    console.log(this.job);
+    var isItClone = (this.router.url).includes('clone');
+    var result$ = (this.job.id && !isItClone) ? this.jobService.update(this.job) : this.jobService.create(this.form.value);
+    result$.subscribe(job => {
+      this.toastyService.success({
+        title: 'Success',
+        msg: 'Data was sucessfully saved.',
+        theme: 'bootstrap',
+        showClose: true,
+        timeout: 3000
+      });
+      this.router.navigate(['/jobs']);
+    });
+  }
+};
+
 

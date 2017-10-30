@@ -49,11 +49,6 @@
           <div class="text-danger" *ngIf="!jobDescription?.valid && jobDescription.touched">
             <span class="text-danger" *ngIf="jobDescription.errors?.required">Job Description is Required.</span>
           </div>
-          <!-- <div>
-              <span class="text-danger" *ngIf="jobDescription.errors?.required"> dfdfdfdfdfdfdf
-              </span>
-            </div> -->
-
         </div>
 
         <div class="form-group">
@@ -239,17 +234,17 @@
         </div>
 
         <fieldset class="well the-fieldset">
-
           <h4>Admin Section</h4>
           <br>
           <div class="form-group">
             <label for="author">Author</label>
             <input formControlName="author" id="author" type="text" class="form-control" [(ngModel)]="job.author">
           </div>
+
           <div formGroupName="stat">
             <div class="form-group">
               <label for="apscl">ApsCl</label>
-              <input formControlName="apscl" id="apscl" type="text" class="form-control" [(ngModel)]="job.stat.apsCl">
+              <input formControlName="apscl" id="apscl" type="text" class="form-control" [(ngModel)]="job.stat && job.stat.apsCl">
               <div *ngIf="!apscl?.valid && apscl?.touched && apscl?.errors?.pattern">
                 <span class="text-danger">Only Numbers are Allowed.</span>
               </div>
@@ -257,7 +252,7 @@
 
             <div class="form-group">
               <label for="bob">BOB</label>
-              <input formControlName="bob" id="bob" type="text" class="form-control" [(ngModel)]="job.stat.bob">
+              <input formControlName="bob" id="bob" type="text" class="form-control" [(ngModel)]="job.stat && job.stat.bob">
               <div *ngIf="!bob?.valid && bob?.touched && bob?.errors?.pattern">
                 <span class="text-danger">Only Numbers are Allowed.</span>
               </div>
@@ -265,7 +260,7 @@
 
             <div class="form-group">
               <label for="intvs">Intvs</label>
-              <input formControlName="intvs" id="intvs" type="text" class="form-control" [(ngModel)]="job.stat.intvs">
+              <input formControlName="intvs" id="intvs" type="text" class="form-control" [(ngModel)]="job.stat && job.stat.intvs">
               <div *ngIf="!intvs?.valid && intvs?.touched && intvs?.errors?.pattern">
                 <span class="text-danger">Only Numbers are Allowed.</span>
               </div>
@@ -273,7 +268,7 @@
 
             <div class="form-group">
               <label for="intvs2">Intvs2</label>
-              <input formControlName="intvs2" id="intvs2" type="text" class="form-control" [(ngModel)]="job.stat.intvs2">
+              <input formControlName="intvs2" id="intvs2" type="text" class="form-control" [(ngModel)]="job.stat && job.stat.intvs2">
               <div *ngIf="!intvs2?.valid && intvs2?.touched && intvs2?.errors?.pattern">
                 <span class="text-danger">Only Numbers are Allowed.</span>
               </div>
@@ -281,7 +276,7 @@
           </div>
           <div class="checkbox">
             <label>
-                  <input class="big-checkbox" formControlName="isBestPerforming" type="checkbox" id="isBestPerforming" name="isBestPerforming" [(ngModel)]="job.isBEstPerforming"/> Is Best Performing
+                  <input class="big-checkbox" formControlName="isBestPerforming" type="checkbox" id="isBestPerforming" name="isBestPerforming" [(ngModel)]="job.isBestPerforming"/> Is Best Performing
                 </label>
           </div>
 
@@ -290,14 +285,13 @@
                   <input class="big-checkbox" formControlName="isEverGreen" type="checkbox" id="isEverGreen" name="isEverGreen" [(ngModel)]="job.isEverGreen"/> Is Ever Green
                 </label>
           </div>
-
         </fieldset>
 
-        <p>{{form.value | json}}</p>
-        <p>{{job | json}}</p>
-        <button class="btn btn-success pull-left" type="submit">Create</button>
-        <button class="btn btn-warning pull-right cancel-btn">Cancel</button>
-        <button class="btn btn-primary pull-right">Back to List</button>
+        <!-- <p>{{form.value | json}}</p>
+        <p>{{job | json}}</p> -->
+        <button class="btn btn-success pull-left" type="submit">Save</button>
+        <button class="btn btn-warning pull-right cancel-btn" type="button">Cancel</button>
+        <button class="btn btn-primary pull-right" type="button">Back to List</button>
       </form>
     </div>
   </div>
